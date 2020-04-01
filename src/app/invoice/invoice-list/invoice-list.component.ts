@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InvoiceService } from 'src/app/shared/services/invoice.service';
 import { Invoice } from 'src/app/shared/models/invoice';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InvoiceDetailComponent } from '../invoice-detail/invoice-detail.component';
 
 @Component({
   selector: 'expenses-invoice-list',
@@ -11,15 +13,28 @@ export class InvoiceListComponent implements OnInit {
 
   invoices: Invoice[];
 
-  constructor(private invoiceService: InvoiceService) { }
+  constructor(
+    private invoiceService: InvoiceService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.getInvoices();
   }
 
+  /**
+   * Get invoices and populate it on local variable
+   */
   getInvoices(): void {
     this.invoiceService.getInvoices()
       .subscribe(invoices => this.invoices = invoices);
+  }
+
+  /**
+   * Open InvoiceDetailComponent to edit the invoice.
+   * @param invoice Invoice to edit
+   */
+  editInvoice(invoice: Invoice): void {
+    this.modalService.open(InvoiceDetailComponent);
   }
 
 }

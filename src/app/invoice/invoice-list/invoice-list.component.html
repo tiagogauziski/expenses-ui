@@ -1,7 +1,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">Actions</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Reurrence Type</th>
@@ -9,7 +9,11 @@
     </thead>
     <tbody>
         <tr *ngFor="let invoice of invoices; index as i">
-            <th scope="row">{{ i + 1 }}</th>
+            <th scope="row">
+                <button type="button" class="btn btn-sm btn-link"
+                (click)="editInvoice(invoice)">Edit</button>
+                <button type="button" class="btn btn-sm btn-link">Delete</button>
+            </th>
             <td>
                 {{ invoice.name }}
             </td>
