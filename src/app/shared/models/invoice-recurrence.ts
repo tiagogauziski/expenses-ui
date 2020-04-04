@@ -1,5 +1,5 @@
 export interface InvoiceRecurrence {
-    recurrencyType: string;
+    recurrenceType: string;
     start?: string;
     times?: number;
 }

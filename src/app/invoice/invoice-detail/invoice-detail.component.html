@@ -5,28 +5,75 @@
     </button>
 </div>
 <div class="modal-body">
-    <form>
+    <form [formGroup]="invoiceForm">
         <div class="form-group">
-            <label for="exampleInputEmail1">Name</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="name">Name</label>
+            <input [ngClass]="{ 'is-invalid': invoiceForm.get('name').invalid }"
+                type="text" class="form-control" formControlName="name" id="name">
+            <div 
+                *ngIf="invoiceForm.get('name').invalid && (invoiceForm.get('name').dirty || invoiceForm.get('name').touched)"
+                class="invalid-feedback">
+
+                <div *ngIf="invoiceForm.get('name').errors.required">
+                    Name is required.
+                </div>
+                <div *ngIf="invoiceForm.get('name').errors.minlength">
+                    Name must be at least 4 characters long.
+                </div>
+                <div *ngIf="invoiceForm.get('name').errors.forbiddenName">
+                    Name cannot be Bob.
+                </div>
+            </div>
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Description</label>
-            <input type="text" class="form-control" id="exampleInputPassword1">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" formControlName="description" id="description">
         </div>
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">Recurrence Type</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>None</option>
-                <option>Yearly</option>
-                <option>Monthly</option>
-                <option>Weekly</option>
-                <option>Custom</option>
-            </select>
+
+        <!-- <h5>Recurrence</h5> -->
+        <div class="card">
+            <div class="card-header">
+                Recurrence
+            </div>
+            <div class="card-body">
+                <div formGroupName="recurrence">
+                    <div class="form-group">
+                        <label for="recurrenceType">Recurrence Type</label>
+                        <select class="form-control" id="recurrenceType" formControlName="recurrenceType">
+                            <option value="None">None</option>
+                            <option value="Yearly">Yearly</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="start">Start</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="dd/mm/yyyy" id="start" formControlName="start"
+                                ngbDatepicker #d="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                    type="button"></button>
+                            </div>
+                        </div>
+                        <!-- <input type="text" class="form-control"  id="start"> -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="times">Times</label>
+                        <input type="text" class="form-control" formControlName="times" id="times">
+                    </div>
+                </div>
+            </div>
         </div>
+
+
     </form>
+    <!-- <pre>Model: {{ invoiceForm.value | json }}</pre> -->
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-secundary" (click)="activeModal.close('close')">Close</button>
-    <button type="button" class="btn btn-primary" (click)="activeModal.close('save')">Save</button>
+    <button type="button" class="btn btn-secundary" (click)="onClose()">Close</button>
+    <button type="button" class="btn btn-primary" (click)="onSave()">Save</button>
 </div>

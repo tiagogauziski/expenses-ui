@@ -16,7 +16,7 @@ export class InvoiceService {
         description: 'Weekly Rent',
         name: 'Rent',
         recurrence: {
-          recurrencyType: 'Weekly',
+          recurrenceType: 'Weekly',
           start: '2020-03-27:00:00:00Z'
         }
       }
