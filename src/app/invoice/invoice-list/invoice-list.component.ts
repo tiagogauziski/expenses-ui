@@ -6,38 +6,57 @@ import { InvoiceDetailComponent } from '../invoice-detail/invoice-detail.compone
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'expenses-invoice-list',
-  templateUrl: './invoice-list.component.html',
-  styleUrls: ['./invoice-list.component.scss']
+    selector: 'expenses-invoice-list',
+    templateUrl: './invoice-list.component.html',
+    styleUrls: ['./invoice-list.component.scss']
 })
 export class InvoiceListComponent implements OnInit {
 
-  invoices: Invoice[];
+    invoices: Invoice[];
 
-  constructor(
-    private invoiceService: InvoiceService,
-    private modalService: NgbModal) { }
+    constructor(
+        private invoiceService: InvoiceService,
+        private modalService: NgbModal) { }
 
-  ngOnInit(): void {
-    this.getInvoices();
-  }
+    ngOnInit(): void {
+        this.getInvoices();
+    }
 
-  /**
-   * Get invoices and populate it on local variable
-   */
-  getInvoices(): void {
-    this.invoiceService.getInvoices()
-      .subscribe(invoices => this.invoices = invoices);
-  }
+    /**
+     * Get invoices and populate it on local variable
+     */
+    getInvoices(): void {
+        this.invoiceService.getInvoices()
+            .subscribe(invoices => this.invoices = invoices.data);
+    }
 
-  /**
-   * Open InvoiceDetailComponent to edit the invoice.
-   * @param invoice Invoice to edit
-   */
-  editInvoice(invoice: Invoice): void {
-    const modalRef = this.modalService.open(InvoiceDetailComponent);
+    /**
+     * Open InvoiceDetailComponent to edit the invoice.
+     * @param invoice Invoice to edit
+     */
+    editInvoice(invoice: Invoice): void {
+        const modalRef = this.modalService.open(InvoiceDetailComponent);
 
-    modalRef.componentInstance.invoice = of(invoice);
-  }
+        modalRef.componentInstance.invoice = of(invoice);
+
+        modalRef.result.then((value: Invoice) => {
+            this.invoiceService.editInvoice(value).subscribe(_ => {
+                this.getInvoices();
+            });
+        });
+    }
+
+    onInvoiceAdd(): void {
+        const modalRef = this.modalService.open(InvoiceDetailComponent);
+
+        modalRef.componentInstance.invoice = of({});
+
+        modalRef.result.then((value: Invoice) => {
+            value.id = Math.random().toString();
+            this.invoiceService.addInvoice(value).subscribe(_ => {
+                this.getInvoices();
+            });;
+        });
+    }
 
 }

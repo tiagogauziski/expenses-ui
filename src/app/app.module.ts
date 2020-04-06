@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule }    from '@angular/common/http';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
@@ -17,6 +18,7 @@ import { NgbDateParserFormatterCustom } from 'src/app/shared/providers/NgbDatePa
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    HttpClientModule,
     InvoiceModule
   ],
   providers: [

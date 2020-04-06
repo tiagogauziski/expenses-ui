@@ -11,16 +11,26 @@ import { Observable } from 'rxjs';
 })
 export class InvoiceDetailComponent implements OnInit {
   @Input() invoice: Observable<Invoice>;
+  id: string;
+  submitted: boolean = false;
 
   invoiceForm: FormGroup = new FormGroup({
     name: new FormControl(undefined, [
-      Validators.required
+      Validators.required,
+      Validators.maxLength(150)
     ]),
-    description: new FormControl(),
+    description: new FormControl(undefined, [
+      Validators.maxLength(500)
+    ]),
     recurrence: new FormGroup({
-      recurrenceType: new FormControl(),
-      start: new FormControl(),
-      times: new FormControl()
+      recurrenceType: new FormControl(undefined, [
+        Validators.required
+      ]),
+      start: new FormControl(undefined, [
+        Validators.required
+      ]),
+      times: new FormControl(undefined, [
+      ])
     })
   });
 
@@ -29,14 +39,28 @@ export class InvoiceDetailComponent implements OnInit {
   ngOnInit(): void {
     this.invoice.subscribe(invoice => {
       this.invoiceForm.patchValue(invoice);
+      this.id = invoice.id;
     })
   }
 
   onSave() : void {
+    this.submitted = true;
+
+    if (this.invoiceForm.valid) {
+      // Merge id into invoiceForm value
+      this.activeModal.close({...this.invoiceForm.value, ...{ id: this.id }});
+    }
+    else {
+      console.log("Invalid Form")
+    }
+  }
+
+  onSubmit(): void {
+    
   }
 
   onClose() : void {
-    this.activeModal.close("CLOSE");
+    this.activeModal.dismiss("CLOSE");
   }
 
 }
