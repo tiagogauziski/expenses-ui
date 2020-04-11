@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./invoice-detail.component.scss']
 })
 export class InvoiceDetailComponent implements OnInit {
-  @Input() invoice: Observable<Invoice>;
+  @Input() invoiceObservable: Observable<Invoice>;
   id: string;
   submitted: boolean = false;
 
@@ -37,7 +37,7 @@ export class InvoiceDetailComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
-    this.invoice.subscribe(invoice => {
+    this.invoiceObservable.subscribe(invoice => {
       this.invoiceForm.patchValue(invoice);
       this.id = invoice.id;
     })

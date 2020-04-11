@@ -1,6 +1,6 @@
 <form>
     <div class="form-group form-inline">
-        <button type="button" class="btn btn-primary" (click)="onInvoiceAdd()">Add</button>
+        <button type="button" class="btn btn-primary" (click)="addInvoice()">Add</button>
         
         <div class="">
             Search: <input class="form-control " type="text"/>
@@ -21,7 +21,8 @@
             <th scope="row">
                 <button type="button" class="btn btn-sm btn-link"
                 (click)="editInvoice(invoice)">Edit</button>
-                <button type="button" class="btn btn-sm btn-link">Delete</button>
+                <button type="button" class="btn btn-sm btn-link"
+                (click)="deleteInvoice(invoice)">Delete</button>
             </th>
             <td>
                 {{ invoice.name }}

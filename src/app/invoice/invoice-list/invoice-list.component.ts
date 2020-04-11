@@ -4,6 +4,7 @@ import { Invoice } from 'src/app/shared/models/invoice';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceDetailComponent } from '../invoice-detail/invoice-detail.component';
 import { of } from 'rxjs';
+import { InvoiceDeleteModalComponent } from '../invoice-delete-modal/invoice-delete-modal.component';
 
 @Component({
     selector: 'expenses-invoice-list',
@@ -37,7 +38,7 @@ export class InvoiceListComponent implements OnInit {
     editInvoice(invoice: Invoice): void {
         const modalRef = this.modalService.open(InvoiceDetailComponent);
 
-        modalRef.componentInstance.invoice = of(invoice);
+        modalRef.componentInstance.invoiceObservable = of(invoice);
 
         modalRef.result.then((value: Invoice) => {
             this.invoiceService.editInvoice(value).subscribe(_ => {
@@ -46,16 +47,40 @@ export class InvoiceListComponent implements OnInit {
         });
     }
 
-    onInvoiceAdd(): void {
+    /**
+     * Open InvoiceDeleteModalComponent to request confirmation
+     * If user confirms operation, call service to delete entry.
+     * @param invoice Invoice to delete
+     */
+    deleteInvoice(invoice: Invoice) : void {
+        const modalRef = this.modalService.open(InvoiceDeleteModalComponent);
+
+        modalRef.componentInstance.invoiceObservable = of(invoice);
+
+        modalRef.result.then((result: boolean) => {
+            if (result) {
+                this.invoiceService.deleteInvoice(invoice).subscribe(_ => {
+                    this.getInvoices();
+                });
+            }
+        }).catch((reason) => {
+            
+        });
+    }
+
+    /**
+     * Open InvoiceDetailComponent to add invoice and submit form
+     */
+    addInvoice(): void {
         const modalRef = this.modalService.open(InvoiceDetailComponent);
 
-        modalRef.componentInstance.invoice = of({});
+        modalRef.componentInstance.invoiceObservable = of({});
 
         modalRef.result.then((value: Invoice) => {
             value.id = Math.random().toString();
             this.invoiceService.addInvoice(value).subscribe(_ => {
                 this.getInvoices();
-            });;
+            });
         });
     }
 

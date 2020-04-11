@@ -54,6 +54,18 @@ export class InvoiceService {
     }
 
     /**
+     * Delete an invoice
+     * @param invoice Invoice model.
+     */
+    deleteInvoice(invoice: Invoice): Observable<Response<Invoice>> {
+        return this.http.delete<Response<Invoice>>(`${this.invoiceUrl}/${invoice.id}`)
+            .pipe(
+                tap((invoice: Response<Invoice>) => this.log('deleted invoice')),
+                catchError(this.handleError<Response<Invoice>>('editInvoice'))
+            );
+    }
+
+    /**
      * Handle Http operation that failed.
      * Let the app continue.
      * @param operation - name of the operation that failed

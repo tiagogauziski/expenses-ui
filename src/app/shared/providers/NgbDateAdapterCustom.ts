@@ -24,7 +24,25 @@ export class NgbDateAdapterCustom extends NgbDateAdapter<string> {
     return null;
   }
 
+  /**
+   * Add leading zeros to a nunber and covert to string
+   * @param num Number to add leading zeros
+   * @param size Size of leading zeros
+   */
+  padString(num: number, size) : string {
+    let s = num + '';
+
+    while (s.length < size) {
+      s = '0' + s;
+    }
+
+    return s;
+  }
+
   toModel(date: NgbDateStruct | null): string | null {
-    return date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day  : null;
+    return date ? 
+      date.year + this.DELIMITER + 
+      this.padString(date.month, 2) + this.DELIMITER + 
+      this.padString(date.day, 2)  : null;
   }
 }
