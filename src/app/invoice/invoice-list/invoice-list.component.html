@@ -1,34 +1,36 @@
-<form>
-    <div class="form-group form-inline">
-        <button type="button" class="btn btn-primary" (click)="addInvoice()">Add</button>
-        
-        <div class="">
-            Search: <input class="form-control " type="text"/>
+<div class="container">
+    <form>
+        <div class="form-group form-inline">
+            <button type="button" class="btn btn-primary" (click)="addInvoice()">Add</button>
+            
+            <div class="">
+                Search: <input class="form-control " type="text"/>
+            </div>
         </div>
-    </div>
-</form>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Actions</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Reurrence Type</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let invoice of invoices; index as i">
-            <th scope="row">
-                <button type="button" class="btn btn-sm btn-link"
-                (click)="editInvoice(invoice)">Edit</button>
-                <button type="button" class="btn btn-sm btn-link"
-                (click)="deleteInvoice(invoice)">Delete</button>
-            </th>
-            <td>
-                {{ invoice.name }}
-            </td>
-            <td>{{ invoice.description }}</td>
-            <td>{{ invoice.recurrence.recurrenceType }}</td>
-        </tr>
-    </tbody>
-</table>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Actions</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Recurrence Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let invoice of invoices; index as i">
+                <th scope="row">
+                    <button type="button" class="btn btn-sm btn-link"
+                    (click)="editInvoice(invoice)">Edit</button>
+                    <button type="button" class="btn btn-sm btn-link"
+                    (click)="deleteInvoice(invoice)">Delete</button>
+                </th>
+                <td>
+                    {{ invoice.name }}
+                </td>
+                <td>{{ invoice.description }}</td>
+                <td>{{ invoice.recurrence.recurrenceType }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

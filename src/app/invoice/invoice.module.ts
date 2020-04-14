@@ -5,6 +5,7 @@ import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.componen
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceDeleteModalComponent } from './invoice-delete-modal/invoice-delete-modal.component';
+import { InvoiceRoutingModule } from './invoice-routing.module';
 
 
 
@@ -18,6 +19,7 @@ import { InvoiceDeleteModalComponent } from './invoice-delete-modal/invoice-dele
     InvoiceListComponent
   ],
   imports: [
+    InvoiceRoutingModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,

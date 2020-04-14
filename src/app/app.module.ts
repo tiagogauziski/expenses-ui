@@ -9,6 +9,9 @@ import { NgbModule, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap
 import { InvoiceModule } from 'src/app/invoice/invoice.module';
 import { NgbDateAdapterCustom } from 'src/app/shared/providers/NgbDateAdapterCustom';
 import { NgbDateParserFormatterCustom } from 'src/app/shared/providers/NgbDateParserFormatterCustom';
+import { HomeModule } from './home/home.module';
+import { StatementModule } from './statement/statement.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { NgbDateParserFormatterCustom } from 'src/app/shared/providers/NgbDatePa
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    InvoiceModule
+    InvoiceModule,
+    StatementModule,
+    RouterModule,
+    HomeModule
   ],
   providers: [
     {provide: NgbDateAdapter, useClass: NgbDateAdapterCustom },

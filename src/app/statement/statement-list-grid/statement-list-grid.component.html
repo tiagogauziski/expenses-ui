@@ -1,0 +1,27 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Actions</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Invoice Name</th>
+                <th scope="col">Value</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let statement of statements; index as i">
+                <th scope="row">
+                    <button type="button" class="btn btn-sm btn-link"
+                    (click)="setPaidValue(statement)">Set Value</button>
+                </th>
+                <td>
+                    {{ statement.date | date }}
+                </td>
+                <td>{{ statement.invoice.name }}</td>
+                <td>{{ statement.value }}</td>
+                <td>Pending</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
