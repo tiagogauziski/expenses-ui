@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h4 class="modal-title">Statement</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="statementForm" (onSubmit)="onSubmit()" >
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="text" readonly class="form-control-plaintext" id="date"
+            [value]="statementForm.get('date').value | date">
+        </div>
+        <div class="form-group" formGroupName="invoice">
+            <label for="name">Invoice Name</label>
+            <input type="text" readonly class="form-control-plaintext" formControlName="name" id="name">
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" formControlName="amount" id="amount">
+        </div>
+        <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea type="text" class="form-control" formControlName="notes" id="notes"
+            [ngClass]="{ 'is-invalid': statementForm.get('notes').invalid && submitted }">
+            </textarea>
+            <div *ngIf="statementForm.get('notes').invalid && (statementForm.get('notes').dirty || statementForm.get('notes').touched)"
+                class="invalid-feedback">
+                <div *ngIf="statementForm.get('notes').errors.maxlength">
+                    Notes cannot be greater than 500 characters long.
+                </div>
+            </div>
+        </div>
+    </form>
+    <pre>Model: {{ statementForm.value | json }}</pre>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secundary" (click)="onClose()">Close</button>
+    <button type="submit" class="btn btn-primary" (click)="onSave()">Save</button>
+</div>

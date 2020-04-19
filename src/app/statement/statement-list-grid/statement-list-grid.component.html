@@ -5,7 +5,7 @@
                 <th scope="col">Actions</th>
                 <th scope="col">Due Date</th>
                 <th scope="col">Invoice Name</th>
-                <th scope="col">Value</th>
+                <th scope="col">Amount</th>
                 <th scope="col">Status</th>
             </tr>
         </thead>
@@ -19,8 +19,11 @@
                     {{ statement.date | date }}
                 </td>
                 <td>{{ statement.invoice.name }}</td>
-                <td>{{ statement.value }}</td>
-                <td>Pending</td>
+                <td>{{ statement.amount | currency }}</td>
+                <td>
+                    <span *ngIf="statement.isPaid == true">Paid</span>
+                    <span *ngIf="statement.isPaid != true">Pending</span>
+                </td>
             </tr>
         </tbody>
     </table>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeHeaderComponent } from './home-header/home-header.component';
 import { HomeFooterComponent } from './home-footer/home-footer.component';
 import { RouterModule } from '@angular/router';
-
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    LoadingBarHttpClientModule,
   ],
   exports: [
     HomeHeaderComponent,

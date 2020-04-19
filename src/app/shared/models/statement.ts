@@ -5,5 +5,6 @@ export interface Statement {
     value: number;
     notes: string;
     date: string;
+    isPaid: boolean;
     invoice: Invoice;
 }

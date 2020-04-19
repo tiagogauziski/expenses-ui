@@ -5,11 +5,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'expenses-invoice-detail',
-  templateUrl: './invoice-detail.component.html',
-  styleUrls: ['./invoice-detail.component.scss']
+  selector: 'expenses-invoice-detail-modal',
+  templateUrl: './invoice-detail-modal.component.html',
+  styleUrls: ['./invoice-detail-modal.component.scss']
 })
-export class InvoiceDetailComponent implements OnInit {
+export class InvoiceDetailModalComponent implements OnInit {
   @Input() invoiceObservable: Observable<Invoice>;
   id: string;
   submitted: boolean = false;

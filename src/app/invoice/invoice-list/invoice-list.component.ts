@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InvoiceService } from 'src/app/shared/services/invoice.service';
 import { Invoice } from 'src/app/shared/models/invoice';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { InvoiceDetailComponent } from '../invoice-detail/invoice-detail.component';
+import { InvoiceDetailModalComponent } from '../invoice-detail-modal/invoice-detail-modal.component';
 import { of } from 'rxjs';
 import { InvoiceDeleteModalComponent } from '../invoice-delete-modal/invoice-delete-modal.component';
 
@@ -36,7 +36,7 @@ export class InvoiceListComponent implements OnInit {
      * @param invoice Invoice to edit
      */
     editInvoice(invoice: Invoice): void {
-        const modalRef = this.modalService.open(InvoiceDetailComponent);
+        const modalRef = this.modalService.open(InvoiceDetailModalComponent);
 
         modalRef.componentInstance.invoiceObservable = of(invoice);
 
@@ -72,7 +72,7 @@ export class InvoiceListComponent implements OnInit {
      * Open InvoiceDetailComponent to add invoice and submit form
      */
     addInvoice(): void {
-        const modalRef = this.modalService.open(InvoiceDetailComponent);
+        const modalRef = this.modalService.open(InvoiceDetailModalComponent);
 
         modalRef.componentInstance.invoiceObservable = of({});
 
