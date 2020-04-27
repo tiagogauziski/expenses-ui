@@ -4,12 +4,13 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Invoice } from '../models/invoice';
 import { Response } from '../models/Response';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class InvoiceService {
-    private invoiceUrl = 'https://localhost:5001/invoice';  // URL to web api
+    private invoiceUrl = `${environment.apiUrl}/invoice`;  // URL to web api
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -4,13 +4,13 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Response } from '../models/response';
 import { Statement } from '../models/statement';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatementService {
-  private serverUrl = 'https://localhost:5001';  // URL to web api
-  private statementUrl = `${this.serverUrl}/statement`;  // URL to web api
+  private statementUrl = `${environment.apiUrl}/statement`;  // URL to web api
 
   httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
