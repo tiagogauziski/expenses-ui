@@ -3,7 +3,6 @@ services:
   - docker
 before_install: 
   - npm install -g @angular/cli
-  - dotnet restore
 script:
   - npm install
   - npm run build --prod
