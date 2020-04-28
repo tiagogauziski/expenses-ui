@@ -18,8 +18,14 @@ docker build -t $DOCKER_IMAGE_NAME .
 # Login to Docker Hub and upload images
 docker login $DOCKER_REGISTRY --username $DOCKER_LOGIN --password $DOCKER_PASSWORD
 
-if test -z "$TAG"
+if [ -z "$TAG" ]
 then
+    echo "Building from branch $BRANCH"
+
+    docker tag $DOCKER_IMAGE_NAME $DOCKER_IMAGE_NAME:$BRANCH
+
+    docker push $DOCKER_IMAGE_NAME:$BRANCH
+else
     echo "Building from tag $TAG"
     
     docker tag $DOCKER_IMAGE_NAME $DOCKER_IMAGE_NAME:$SEMVER
@@ -27,10 +33,4 @@ then
 
     docker push $DOCKER_IMAGE_NAME:$SEMVER
     docker push $DOCKER_IMAGE_NAME:latest
-else
-    echo "Building from branch $BRANCH"
-
-    docker tag $DOCKER_IMAGE_NAME $DOCKER_IMAGE_NAME:$BRANCH
-
-    docker push $DOCKER_IMAGE_NAME:$BRANCH
 fi
