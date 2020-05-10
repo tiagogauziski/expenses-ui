@@ -14,14 +14,23 @@
         </div>
       </nav> -->
   <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal" routerLink="/">My Monthly Expenses</h5>
+    <h5 class="my-0 mr-md-auto font-weight-normal nav-brand" routerLink="/">My Monthly Expenses</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" routerLink="/profile" routerLinkActive="active">Profile</a>
       <a class="p-2 text-dark" routerLink="/invoice" routerLinkActive="active">Invoices</a>
       <a class="p-2 text-dark" routerLink="/statement" routerLinkActive="active">Statements (Grid)</a>
       <a class="p-2 text-dark" routerLink="/statement/list-cards" routerLinkActive="active">Statements (Cards)</a>
     </nav>
     <button class="btn btn-outline-primary" (click)="auth.login()" *ngIf="!auth.loggedIn">Log In</button>
-    <button class="btn btn-outline-primary" (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
+    <span *ngIf="auth.loggedIn && auth.userProfile$ | async as profile" ngbDropdown>
+      <a *ngIf="auth.userProfile$ | async as profile" id="avatar" class="header-complex-invoker" ngbDropdownToggle>
+        <img class="avatar rounded-circle mr-md-2" src="{{profile.picture}}" alt="profile avatar">
+        <span class="d-none d-md-block">{{profile.name}}</span>
+        <i class="nova-angle-down d-none d-md-block ml-2"></i>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button ngbDropdownItem routerLink="/profile">Profile</button>
+          <button ngbDropdownItem (click)="auth.logout()">Logout</button>
+        </div>
+      </a>
+    </span>
   </div>
 </header>
