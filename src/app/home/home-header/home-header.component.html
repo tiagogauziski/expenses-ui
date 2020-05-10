@@ -1,6 +1,6 @@
 <ngx-loading-bar></ngx-loading-bar>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
         <a class="navbar-brand" routerLink="/">My Monthly Expenses</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -12,5 +12,16 @@
             <a class="nav-item nav-link" routerLink="/statement/list-cards" routerLinkActive="active">Statements (Cards)</a>
           </div>
         </div>
-      </nav>
-</header>   
+      </nav> -->
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal" routerLink="/">My Monthly Expenses</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+      <a class="p-2 text-dark" routerLink="/profile" routerLinkActive="active">Profile</a>
+      <a class="p-2 text-dark" routerLink="/invoice" routerLinkActive="active">Invoices</a>
+      <a class="p-2 text-dark" routerLink="/statement" routerLinkActive="active">Statements (Grid)</a>
+      <a class="p-2 text-dark" routerLink="/statement/list-cards" routerLinkActive="active">Statements (Cards)</a>
+    </nav>
+    <button class="btn btn-outline-primary" (click)="auth.login()" *ngIf="!auth.loggedIn">Log In</button>
+    <button class="btn btn-outline-primary" (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
+  </div>
+</header>

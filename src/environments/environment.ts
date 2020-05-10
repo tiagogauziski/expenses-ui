@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://localhost:5001"
+  apiUrl: "https://localhost:5001",
+  auth: {
+    domain: "myexpenses.au.auth0.com",
+    clientId: "CvWRd4z8d00kxf2rhLPfWDvVaPmS4ZC3"
+  }
 };
 
 /*

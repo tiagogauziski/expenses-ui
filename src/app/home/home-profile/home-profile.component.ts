@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
-  selector: 'expenses-home-header',
-  templateUrl: './home-header.component.html',
-  styleUrls: ['./home-header.component.scss']
+  selector: 'expenses-home-profile',
+  templateUrl: './home-profile.component.html',
+  styleUrls: ['./home-profile.component.scss']
 })
-export class HomeHeaderComponent implements OnInit {
+export class HomeProfileComponent implements OnInit {
 
   constructor(public auth: AuthService) { }
 
