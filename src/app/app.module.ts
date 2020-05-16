@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS }    from '@angular/common/http';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
@@ -12,6 +12,7 @@ import { NgbDateParserFormatterCustom } from 'src/app/shared/providers/NgbDatePa
 import { HomeModule } from './home/home.module';
 import { StatementModule } from './statement/statement.module';
 import { RouterModule } from '@angular/router';
+import { AuthInterceptorService  } from './shared/interceptors/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,12 @@ import { RouterModule } from '@angular/router';
   ],
   providers: [
     {provide: NgbDateAdapter, useClass: NgbDateAdapterCustom },
-    {provide: NgbDateParserFormatter, useClass: NgbDateParserFormatterCustom}
+    {provide: NgbDateParserFormatter, useClass: NgbDateParserFormatterCustom},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
