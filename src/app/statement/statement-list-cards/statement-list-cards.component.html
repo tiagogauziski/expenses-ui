@@ -4,7 +4,7 @@
         <hr class="my-4" />
         <div class="row row-cols-1 row-cols-md-3">
             <div class="col mb-4" *ngFor="let statement of statements[month.getMonth()]; index as i; trackBy: trackByStatement">
-                <div class="card" >
+                <div class="card" [ngClass]="{ 'border border-success': statement.isPaid }">
                     <div class="card-header">
                       {{statement.invoice.name}}
                     </div>
